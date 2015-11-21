@@ -25,7 +25,7 @@ public class PersistenceJpaConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "pl.edu.agh.careSystemService.persistance.model" });
+		em.setPackagesToScan(new String[] { "pl.edu.agh.careSystemService.persistance" });
 
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
@@ -37,8 +37,8 @@ public class PersistenceJpaConfig {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql:127.0.0.1:5432/studia");
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/studia");
 		dataSource.setUsername("postgres");
 		dataSource.setPassword("gesinub");
 		return dataSource;
@@ -62,9 +62,8 @@ public class PersistenceJpaConfig {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		properties.setProperty("hibernate.dialect",
-				"org.hibernate.dialect.MySQL5Dialect");
+				"org.hibernate.dialect.PostgreSQL82Dialect");
 		properties.setProperty("hibernate.format_sql", "true");
 		return properties;
 	}
-
 }

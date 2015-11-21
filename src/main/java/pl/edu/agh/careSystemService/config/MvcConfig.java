@@ -11,6 +11,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import pl.agh.edu.careSystemService.controller.ClientController;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -18,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "pl.edu.agh.careSystemService.controller")
+@ComponentScan(basePackages = "pl.agh.edu.careSystemService.controller")
 public class MvcConfig extends WebMvcConfigurerAdapter{
 
     @Override
@@ -31,4 +33,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
         converters.add(converter);
         super.configureMessageConverters(converters);;
     }
+    
+    @Bean
+    public ClientController clientController() {
+        return new ClientController();
+    }
+
 }
