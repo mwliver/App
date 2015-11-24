@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!--<context:property-placeholder location="file:${softfaktor.base}/softfaktor.properties"/>-->
+
+    <context:annotation-config/>
+
+    <!--<jpa:repositories base-package="pl.coderion.softfaktor.service.dataaccess"-->
+    <!--entity-manager-factory-ref="entityManagerFactory"/>-->
+    <jpa:repositories base-package="pl.edu.agh.careSystemService.persistance.dao"
+                      entity-manager-factory-ref="entityManagerFactory"/>
+
+    <!--<context:component-scan base-package="pl.coderion.softfaktor"/>-->
+
+    <!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>-->
+    <!--<task:executor id="myExecutor" pool-size="5"/>-->
+    <!--<task:scheduler id="myScheduler" pool-size="10"/>-->
+
+    <!--<bean id="forkAdvice" class="pl.coderion.softfaktor.aop.ForkAdvice"/>-->
+
+    <!--<aop:aspectj-autoproxy/>-->
+
+    <!--<aop:config>-->
+    <!--<aop:aspect ref="forkAdvice">-->
+    <!--<aop:around method="fork"-->
+    <!--pointcut="execution(* pl.coderion.softfaktor.service.messaging.service.JavaMailService.send(..))"/>-->
+    <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!--<bean-->
+    <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+    <!--<property-->
+    <!--name="targetObject">-->
+    <!--&lt;!&ndash; System.getProperties() &ndash;&gt;-->
+    <!--<bean-->
+    <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+    <!--<property name="targetClass" value="java.lang.System"/>-->
+    <!--<property name="targetMethod" value="getProperties"/>-->
+    <!--</bean>-->
+    <!--</property>-->
+    <!--<property-->
+    <!--name="targetMethod"-->
+    <!--value="putAll"/>-->
+    <!--<property-->
+    <!--name="arguments">-->
+    <!--&lt;!&ndash; The new Properties &ndash;&gt;-->
+    <!--<util:properties>-->
+    <!--<prop key="javax.xml.bind.JAXBContext">com.sun.xml.internal.bind.v2.ContextFactory</prop>-->
+    <!--</util:properties>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+</beans>

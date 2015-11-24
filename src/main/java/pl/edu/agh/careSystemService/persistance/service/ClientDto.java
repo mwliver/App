@@ -1,4 +1,4 @@
-package pl.edu.agh.careSystemService.persistance.dao;
+package pl.edu.agh.careSystemService.persistance.service;
 
 public class ClientDto {
 	

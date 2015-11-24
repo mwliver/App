@@ -1,15 +1,12 @@
 package pl.edu.agh.careSystemService.persistance.dao;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Component;
+import pl.edu.agh.careSystemService.persistance.service.ClientDto;
 
-import pl.edu.agh.careSystemService.persistance.model.Client;
+import java.util.List;
 
 public interface ClientDao extends PagingAndSortingRepository<Client, Long>, JpaSpecificationExecutor<Client> {
 	

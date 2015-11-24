@@ -1,18 +1,17 @@
-package pl.agh.edu.careSystemService.controller;
-
-import java.util.Date;
-import java.util.List;
+package pl.edu.agh.careSystemService.controller;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import pl.agh.edu.careSystemService.persistance.specification.ClientQuery;
-import pl.agh.edu.careSystemService.persistance.specification.ClientSpecification;
+import pl.edu.agh.careSystemService.persistance.dao.Client;
 import pl.edu.agh.careSystemService.persistance.dao.ClientDao;
-import pl.edu.agh.careSystemService.persistance.dao.ClientDto;
-import pl.edu.agh.careSystemService.persistance.model.Client;
+import pl.edu.agh.careSystemService.persistance.dao.ClientSpecification;
+import pl.edu.agh.careSystemService.persistance.service.ClientDto;
+import pl.edu.agh.careSystemService.persistance.service.ClientQuery;
+
+import java.util.Date;
+import java.util.List;
 
 
 @RestController

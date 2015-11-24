@@ -1,15 +1,13 @@
-package pl.agh.edu.careSystemService.persistance.specification;
+package pl.edu.agh.careSystemService.persistance.dao;
 
-import java.util.ArrayList;
+import org.springframework.data.jpa.domain.Specification;
+import pl.edu.agh.careSystemService.persistance.service.ClientQuery;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
-
-import pl.edu.agh.careSystemService.persistance.model.Client;
+import java.util.ArrayList;
 
 public class ClientSpecification {
 

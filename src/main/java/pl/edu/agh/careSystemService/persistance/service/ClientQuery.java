@@ -1,4 +1,4 @@
-package pl.agh.edu.careSystemService.persistance.specification;
+package pl.edu.agh.careSystemService.persistance.service;
 
 public class ClientQuery {
 	

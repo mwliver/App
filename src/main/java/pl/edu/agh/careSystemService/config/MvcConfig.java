@@ -1,8 +1,6 @@
 package pl.edu.agh.careSystemService.config;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,17 +8,16 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import pl.edu.agh.careSystemService.controller.ClientController;
 
-import pl.agh.edu.careSystemService.controller.ClientController;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 /**
  * Created by gersomlopez on 7/22/14.
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "pl.agh.edu.careSystemService.controller")
+@ComponentScan(basePackages = "pl.edu.agh.careSystemService.controller")
 public class MvcConfig extends WebMvcConfigurerAdapter{
 
     @Override
@@ -31,7 +28,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 //        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         converter.setObjectMapper(objectMapper);
         converters.add(converter);
-        super.configureMessageConverters(converters);;
+        super.configureMessageConverters(converters);
     }
     
     @Bean

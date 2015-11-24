@@ -1,4 +1,4 @@
-package pl.edu.agh.careSystemService.persistance.model;
+package pl.edu.agh.careSystemService.persistance.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
