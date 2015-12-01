@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ClientDao extends PagingAndSortingRepository<Client, Long>, JpaSpecificationExecutor<Client> {
 	
-	@Query("select new pl.edu.agh.careSystemService.persistance.dao.ClientDto(c.name, c.surname, c.id) from Client c where c.name = :nameParam")
+	@Query("select new pl.edu.agh.careSystemService.persistance.service.ClientDto(c.name, c.surname, c.id) from Client c where c.name = :nameParam")
 	List<ClientDto> getClientDto(@Param("nameParam") String name);
 }

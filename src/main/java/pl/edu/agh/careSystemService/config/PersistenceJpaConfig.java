@@ -1,12 +1,11 @@
 package pl.edu.agh.careSystemService.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -18,38 +17,41 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "pl.edu.agh.careSystemService.persistance" })
+@EnableJpaRepositories("pl.edu.agh.careSystemService.persistance")
 public class PersistenceJpaConfig {
+
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "pl.edu.agh.careSystemService.persistance" });
+	public EntityManagerFactory entityManagerFactory() {
 
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		em.setJpaVendorAdapter(vendorAdapter);
-		em.setJpaProperties(additionalProperties());
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		vendorAdapter.setGenerateDdl(true);
 
-		return em;
+		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		factory.setJpaVendorAdapter(vendorAdapter);
+		factory.setPackagesToScan("pl.edu.agh.careSystemService.persistance");
+		factory.setDataSource(dataSource());
+		factory.setJpaProperties(additionalProperties());
+		factory.afterPropertiesSet();
+
+		return factory.getObject();
 	}
 
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/studia");
+		dataSource.setUrl("jdbc:postgresql://localhost/studia");
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("gesinub");
+		dataSource.setPassword("postgres");
 		return dataSource;
 	}
 
 	@Bean
-	public PlatformTransactionManager transactionManager(
-			EntityManagerFactory emf) {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(emf);
+	public PlatformTransactionManager transactionManager() {
 
-		return transactionManager;
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(entityManagerFactory());
+		return txManager;
 	}
 
 	@Bean
