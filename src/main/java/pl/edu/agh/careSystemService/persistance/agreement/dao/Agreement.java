@@ -26,6 +26,15 @@ public class Agreement {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Column(name = "sellername")
+    private String sellerName;
+
+    @Column(name = "sellersurname")
+    private String sellerSurname;
+
+    @Column(name = "sellerphone")
+    private String sellerPhone;
+
     public Long getId() {
         return id;
     }
@@ -56,5 +65,29 @@ public class Agreement {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getSellerSurname() {
+        return sellerSurname;
+    }
+
+    public void setSellerSurname(String sellerSurname) {
+        this.sellerSurname = sellerSurname;
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
     }
 }

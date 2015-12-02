@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.careSystemService.persistance.client.dao.Client;
+import pl.edu.agh.careSystemService.persistance.agreement.dao.Agreement;
+import pl.edu.agh.careSystemService.persistance.agreement.dao.AgreementDao;
+import pl.edu.agh.careSystemService.persistance.agreement.dao.AgreementSpecyfication;
+import pl.edu.agh.careSystemService.persistance.agreement.service.AgreementQuery;
 import pl.edu.agh.careSystemService.persistance.client.dao.ClientDao;
-import pl.edu.agh.careSystemService.persistance.client.dao.ClientSpecification;
 import pl.edu.agh.careSystemService.persistance.client.service.ClientDto;
-import pl.edu.agh.careSystemService.persistance.client.service.ClientQuery;
+import pl.edu.agh.careSystemService.persistance.product.dao.ProductDao;
 
 import java.util.Date;
 import java.util.List;
@@ -24,27 +26,68 @@ public class ClientController {
 
 	@Autowired
 	ClientDao clientDao;
+
+	@Autowired
+	AgreementDao agreementDao;
+
+	@Autowired
+	ProductDao productDao;
 	
 	@RequestMapping(value = "/find/client", method = RequestMethod.GET)
-	public List<Client> getClient() {
+	public String getClient() {
 		long startTime = System.currentTimeMillis();
-		ClientQuery query = new ClientQuery();
-		query.setName("Jan");
-		List<Client> toReturn = clientDao.findAll(ClientSpecification.clientToSpecyfication(query));
+		AgreementQuery agreementQuery = new AgreementQuery();
+		agreementQuery.setClientName("Jan");
+		agreementQuery.setClientSurname("Kowalski");
+		agreementQuery.setProductName("Najdluzsza nazwa produktu na swiecie jakiej zadna firma by nie dala produktowi poniewaz jest ona tak dluga ze zapamietac klientowi by sie jej nie udalo");
+		agreementQuery.setProductType("Najdluzszy typ produktu bedacy tak niesamowicie niepraktycznym ze zadna firma by sie na niego nie zdecydowala my jednak na potrzeby edukacyjne pozwolimy sobie na taka nazwe");
+		agreementQuery.setSellerName("Kamil");
+		agreementQuery.setSellerSurname("Niski");
+		List<Agreement> agreements = agreementDao.findAll(AgreementSpecyfication.agreementToSpecyfication(agreementQuery));
+		log.info("LIST SIZE" + agreements.size());
+		for (Agreement agreement : agreements) {
+			agreement.getProduct().getClient().setPesel("1111");
+			clientDao.save(agreement.getProduct().getClient());
+
+			agreement.getProduct().setCreateDate(new Date());
+			productDao.save(agreement.getProduct());
+
+			agreement.setSignDate(new Date());
+			agreementDao.save(agreement);
+		}
+
 		long endTime = System.currentTimeMillis();
-		Date time = new Date(endTime - startTime);
 		log.info("DURATION OF CLIENT : " + millisToShortDHMS(endTime - startTime));
-		return toReturn;
+		return millisToShortDHMS(endTime - startTime);
 	}
-	
+
 	@RequestMapping(value = "/find/clientDto", method = RequestMethod.GET)
-	public List<ClientDto> getClientDto() {
+	public String getClientDto() {
 		long startTime = System.currentTimeMillis();
-		List<ClientDto> toReturn = clientDao.getClientDto("Jan");
+		List<ClientDto> toReturn = clientDao.getClientDto(
+				"Jan",
+				"Kowalski",
+				"Najdluzsza nazwa produktu na swiecie jakiej zadna firma by nie dala produktowi poniewaz jest ona tak dluga ze zapamietac klientowi by sie jej nie udalo",
+				"Najdluzszy typ produktu bedacy tak niesamowicie niepraktycznym ze zadna firma by sie na niego nie zdecydowala my jednak na potrzeby edukacyjne pozwolimy sobie na taka nazwe",
+				"Kamil",
+				"Niski");
+
+		log.info("LIST SIZE" + toReturn.size());
+		for (ClientDto clientDto : toReturn) {
+			if (clientDto.getClientId() != null) {
+				clientDao.updateClientPesel("1111", clientDto.getClientId());
+			}
+			if (clientDto.getAgreementId() != null) {
+				agreementDao.updateAgreementSignDate(new Date(), clientDto.getAgreementId());
+			}
+			if (clientDto.getProductId() != null) {
+				productDao.updateProductCreateDate(new Date(), clientDto.getProductId());
+			}
+
+		}
 		long endTime = System.currentTimeMillis();
-		Date time = new Date(endTime - startTime);
 		log.info("DURATION OF GET CLIENTDTO : " + millisToShortDHMS(endTime - startTime));
-		return toReturn;
+		return millisToShortDHMS(endTime - startTime);
 	}
 
 	public static String millisToShortDHMS(long duration) {

@@ -1,31 +1,78 @@
 package pl.edu.agh.careSystemService.persistance.client.service;
 
-public class ClientDto {
-	
-	private String name;
-	private String surname;
-	private Long id;
+import java.io.Serializable;
+import java.util.Date;
 
-	public ClientDto(String name, String surname, Long id) {
-		this.setName(name);
-		this.setSurname(surname);
-		this.id = id;
+public class ClientDto implements Serializable {
+
+	private String clientPesel;
+	private Date productCreateDate;
+	private Date agreementSignDate;
+
+	private Long clientId;
+	private Long productId;
+	private Long agreementId;
+
+	public ClientDto(String clientPesel,
+					 Date productCreateDate,
+					 Date agreementSignDate,
+					 Long clientId,
+					 Long productId,
+					 Long agreementId) {
+
+		this.clientPesel = clientPesel;
+		this.productCreateDate = productCreateDate;
+		this.agreementSignDate = agreementSignDate;
+		this.clientId = clientId;
+		this.productId = productId;
+		this.agreementId = agreementId;
 	}
 
-	public String getName() {
-		return name;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
-	public String getSurname() {
-		return surname;
+	public Long getAgreementId() {
+		return agreementId;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setAgreementId(Long agreementId) {
+		this.agreementId = agreementId;
 	}
 
+	public String getClientPesel() {
+		return clientPesel;
+	}
+
+	public void setClientPesel(String clientPesel) {
+		this.clientPesel = clientPesel;
+	}
+
+	public Date getProductCreateDate() {
+		return productCreateDate;
+	}
+
+	public void setProductCreateDate(Date productCreateDate) {
+		this.productCreateDate = productCreateDate;
+	}
+
+	public Date getAgreementSignDate() {
+		return agreementSignDate;
+	}
+
+	public void setAgreementSignDate(Date agreementSignDate) {
+		this.agreementSignDate = agreementSignDate;
+	}
+
+	public Long getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
 }

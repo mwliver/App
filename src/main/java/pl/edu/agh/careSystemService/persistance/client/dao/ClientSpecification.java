@@ -9,8 +9,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 
-import static pl.edu.agh.careSystemService.persistance.Jpa.nestedPath;
-
 public class ClientSpecification {
 
 	public static Specification<Client> clientToSpecyfication(final ClientQuery clientQuery) {
@@ -20,18 +18,6 @@ public class ClientSpecification {
 			public Predicate toPredicate(Root<Client> root,
 					CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 				ArrayList<Predicate> restriction = new ArrayList<Predicate>();
-
-				if (clientQuery.getName() != null) {
-					restriction.add(criteriaBuilder.equal(root.get("name"), clientQuery.getName()));
-				}
-
-				if (clientQuery.getSurname() != null) {
-					restriction.add(criteriaBuilder.equal(root.get("surname"), clientQuery.getSurname()));
-				}
-
-                if (clientQuery.getProductName() != null) {
-                    restriction.add(criteriaBuilder.equal(nestedPath(root, "product.productName"), clientQuery.getProductName()));
-                }
 
 				return criteriaBuilder.and(restriction.toArray(new Predicate[]{}));
 			}

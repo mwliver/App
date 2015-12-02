@@ -34,6 +34,15 @@ public class Product {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "user_surname")
+    private String userSurname;
+
+    @Column(name = "user_phone")
+    private String userPhone;
+
     public Long getId() {
         return id;
     }
@@ -96,5 +105,29 @@ public class Product {
 
     public void setSignDate(Date signDate) {
         this.signDate = signDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserSurname() {
+        return userSurname;
+    }
+
+    public void setUserSurname(String userSurname) {
+        this.userSurname = userSurname;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 }
