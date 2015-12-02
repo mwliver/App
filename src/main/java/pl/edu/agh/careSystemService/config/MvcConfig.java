@@ -12,9 +12,6 @@ import pl.edu.agh.careSystemService.controller.ClientController;
 
 import java.util.List;
 
-/**
- * Created by gersomlopez on 7/22/14.
- */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "pl.edu.agh.careSystemService.controller")

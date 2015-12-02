@@ -1,11 +1,5 @@
 package pl.edu.agh.careSystemService.config;
 
-import java.util.Set;
-
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ClassUtils;
@@ -16,9 +10,11 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-/**
- * Created by gersomlopez on 7/22/14.
- */
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRegistration;
+import java.util.Set;
+
 public class WebAppInitializer implements WebApplicationInitializer {
 	private static Logger LOG = LoggerFactory
 			.getLogger(WebAppInitializer.class);

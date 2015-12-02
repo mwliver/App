@@ -9,9 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
-/**
- * Created by gersomlopez on 7/22/14.
- */
 @EnableWebSecurity
 @EnableWebMvcSecurity
 @Configuration

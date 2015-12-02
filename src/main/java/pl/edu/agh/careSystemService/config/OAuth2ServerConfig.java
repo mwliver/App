@@ -20,9 +20,6 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
-/**
- * Created by gersomlopez on 7/22/14.
- */
 @Configuration
 public class OAuth2ServerConfig {
 	protected static final String RESOURCE_ID = "oauthdemo";
